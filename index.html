@@ -1,1311 +1,413 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Beloved (Ch. 20–24) — Close Read</title>
-  <meta name="description" content="Close read website: Beloved (Ch. 20–24). The afterlife of slavery as in-between." />
-
-  <style>
-    :root {
-      --bg: #070A12;
-      --text: rgba(255, 255, 255, .90);
-      --muted: rgba(255, 255, 255, .64);
-      --faint: rgba(255, 255, 255, .42);
-      --border: rgba(255, 255, 255, .12);
-      --shadow: 0 18px 55px rgba(0, 0, 0, .55);
-
-      /* Color: richer but still restrained */
-      --accent: #8b2d2d;
-      /* deep muted red */
-      --accent2: #c7a463;
-      /* muted gold */
-      --accent3: #2f6f8a;
-      /* muted blue */
-      --chipbg: rgba(255, 255, 255, .04);
-
-      --radius: 18px;
-      --max: 1080px;
-
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      --serif: ui-serif, Georgia, "Times New Roman", Times, serif;
-    }
-
-    [data-theme="light"] {
-      --bg: #f6f2ea;
-      --text: rgba(10, 10, 10, .88);
-      --muted: rgba(10, 10, 10, .62);
-      --faint: rgba(10, 10, 10, .42);
-      --border: rgba(10, 10, 10, .12);
-      --shadow: 0 18px 55px rgba(10, 10, 10, .12);
-
-      --accent: #7a1e1e;
-      --accent2: #5a4634;
-      --accent3: #1f5a73;
-      --chipbg: rgba(10, 10, 10, .03);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      background:
-        radial-gradient(1200px 750px at 18% 10%, rgba(199, 164, 99, .20), transparent 58%),
-        radial-gradient(900px 650px at 80% 16%, rgba(139, 45, 45, .18), transparent 55%),
-        radial-gradient(900px 650px at 75% 85%, rgba(47, 111, 138, .14), transparent 60%),
-        var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      line-height: 1.5;
-      letter-spacing: .1px;
-      overflow-x: hidden;
-    }
-
-    a {
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    /* Progress bar */
-    .progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      width: 100%;
-      z-index: 1000;
-      background: transparent;
-    }
-
-    .progress>div {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
-      box-shadow: 0 0 18px rgba(199, 164, 99, .35);
-    }
-
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 22px 18px 80px;
-    }
-
-    /* Sticky nav */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(to bottom, rgba(0, 0, 0, .35), transparent);
-    }
-
-    [data-theme="light"] .nav {
-      background: linear-gradient(to bottom, rgba(246, 242, 234, .90), rgba(246, 242, 234, .55));
-    }
-
-    .navInner {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 14px 18px;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .brand {
-      min-width: 190px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand .title {
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 13.5px;
-      letter-spacing: .35px;
-    }
-
-    .brand .sub {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-
-    .navLinks {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .chip {
-      font-size: 13px;
-      padding: 8px 10px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--chipbg);
-      color: var(--text);
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    .chip:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, .07);
-    }
-
-    [data-theme="light"] .chip:hover {
-      background: rgba(10, 10, 10, .06);
-    }
-
-    .chip[aria-current="page"] {
-      border-color: rgba(199, 164, 99, .55);
-      box-shadow: 0 0 0 3px rgba(199, 164, 99, .14);
-      background: rgba(199, 164, 99, .10);
-    }
-
-    [data-theme="light"] .chip[aria-current="page"] {
-      border-color: rgba(122, 30, 30, .45);
-      box-shadow: 0 0 0 3px rgba(122, 30, 30, .10);
-      background: rgba(122, 30, 30, .06);
-    }
-
-    .actions {
-      min-width: 190px;
-      display: flex;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .btn {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 9px 12px;
-      background: var(--chipbg);
-      color: var(--text);
-      font-size: 13px;
-      cursor: pointer;
-      transition: transform .12s ease, background .2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, .08);
-    }
-
-    [data-theme="light"] .btn:hover {
-      background: rgba(10, 10, 10, .06);
-    }
-
-    .btn small {
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-
-    /* Pages + transitions */
-    .pages {
-      margin-top: 22px;
-    }
-
-    .page {
-      display: none;
-      animation: fadeUp .28s ease;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .page {
-        animation: none;
-      }
-
-      .chip,
-      .btn {
-        transition: none;
-      }
-    }
-
-    /* Hero */
-    .hero {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px 22px;
-      box-shadow: var(--shadow);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .03));
-      position: relative;
-      overflow: hidden;
-    }
-
-    [data-theme="light"] .hero {
-      background: linear-gradient(180deg, rgba(10, 10, 10, .04), rgba(10, 10, 10, .02));
-    }
-
-    .kicker {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: .65px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 10px 0 8px;
-      font-family: var(--serif);
-      font-weight: 800;
-      font-size: clamp(28px, 3.6vw, 44px);
-      line-height: 1.12;
-      letter-spacing: .2px;
-    }
-
-    .lead {
-      max-width: 78ch;
-      margin: 10px 0 18px;
-      color: var(--muted);
-      font-size: 16px;
-    }
-
-    /* Micro illustration */
-    .heroTop {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-
-    .iconBadge {
-      flex: 0 0 auto;
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background:
-        radial-gradient(150px 90px at 30% 20%, rgba(199, 164, 99, .20), transparent 55%),
-        rgba(255, 255, 255, .03);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, .25);
-    }
-
-    [data-theme="light"] .iconBadge {
-      background:
-        radial-gradient(150px 90px at 30% 20%, rgba(122, 30, 30, .10), transparent 55%),
-        rgba(10, 10, 10, .02);
-      box-shadow: 0 10px 20px rgba(10, 10, 10, .08);
-    }
-
-    .iconBadge svg {
-      width: 24px;
-      height: 24px;
-      opacity: .95;
-    }
-
-    /* Thesis block (Overview only) */
-    .thesis {
-      margin-top: 18px;
-      padding: 16px 16px 14px;
-      border-left: 4px solid var(--accent2);
-      border-radius: 12px;
-      background: rgba(199, 164, 99, .10);
-    }
-
-    [data-theme="light"] .thesis {
-      border-left-color: var(--accent);
-      background: rgba(122, 30, 30, .06);
-    }
-
-    .thesis .label {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: .6px;
-      margin-bottom: 8px;
-    }
-
-    .thesis p {
-      margin: 0;
-      font-size: 15.5px;
-    }
-
-    /* Cards */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    @media (min-width: 900px) {
-      .grid.two {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .card {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: rgba(255, 255, 255, .04);
-      padding: 18px 18px 16px;
-      box-shadow: 0 10px 26px rgba(0, 0, 0, .18);
-    }
-
-    [data-theme="light"] .card {
-      box-shadow: 0 10px 26px rgba(10, 10, 10, .08);
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 14px;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-family: var(--mono);
-    }
-
-    .card ul {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .card li {
-      margin: 6px 0;
-      color: var(--text);
-    }
-
-    /* Quote + Highlight Mode */
-    .quote {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 18px 16px;
-      background:
-        radial-gradient(600px 240px at 10% 10%, rgba(139, 45, 45, .16), transparent 60%),
-        radial-gradient(600px 240px at 70% 20%, rgba(199, 164, 99, .14), transparent 65%),
-        rgba(255, 255, 255, .03);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .quote::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-left: 4px solid var(--accent2);
-      border-radius: var(--radius);
-      pointer-events: none;
-      opacity: .9;
-    }
-
-    [data-theme="light"] .quote::before {
-      border-left-color: var(--accent);
-    }
-
-    .qLabel {
-      font-family: var(--mono);
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      color: var(--muted);
-      margin-bottom: 10px;
-    }
-
-    blockquote {
-      margin: 0;
-      font-family: var(--serif);
-      font-size: clamp(20px, 2.2vw, 28px);
-      line-height: 1.25;
-      color: var(--text);
-    }
-
-    .hmRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 12px;
-      align-items: center;
-    }
-
-    .hmBtn {
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 7px 10px;
-      background: rgba(255, 255, 255, .03);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 12.5px;
-      font-family: var(--mono);
-      transition: transform .12s ease, background .2s ease, border-color .2s ease;
-    }
-
-    .hmBtn:hover {
-      transform: translateY(-1px);
-      background: rgba(255, 255, 255, .07);
-    }
-
-    [data-theme="light"] .hmBtn:hover {
-      background: rgba(10, 10, 10, .06);
-    }
-
-    .hmBtn.active {
-      border-color: rgba(199, 164, 99, .55);
-      box-shadow: 0 0 0 3px rgba(199, 164, 99, .12);
-      background: rgba(199, 164, 99, .10);
-    }
-
-    [data-theme="light"] .hmBtn.active {
-      border-color: rgba(122, 30, 30, .45);
-      box-shadow: 0 0 0 3px rgba(122, 30, 30, .10);
-      background: rgba(122, 30, 30, .06);
-    }
-
-    /* Highlight tokens */
-    .tok {
-      padding: 0 .15em;
-      border-radius: .35em;
-      transition: background .15s ease, box-shadow .15s ease;
-      box-shadow: none;
-    }
-
-    .quote[data-mode="diction"] .tok[data-tags~="diction"],
-    .quote[data-mode="syntax"] .tok[data-tags~="syntax"],
-    .quote[data-mode="repetition"] .tok[data-tags~="repetition"],
-    .quote[data-mode="between"] .tok[data-tags~="between"] {
-      background: rgba(199, 164, 99, .22);
-      box-shadow: 0 0 0 2px rgba(199, 164, 99, .10);
-    }
-
-    [data-theme="light"] .quote[data-mode="diction"] .tok[data-tags~="diction"],
-    [data-theme="light"] .quote[data-mode="syntax"] .tok[data-tags~="syntax"],
-    [data-theme="light"] .quote[data-mode="repetition"] .tok[data-tags~="repetition"],
-    [data-theme="light"] .quote[data-mode="between"] .tok[data-tags~="between"] {
-      background: rgba(122, 30, 30, .14);
-      box-shadow: 0 0 0 2px rgba(122, 30, 30, .08);
-    }
-
-    .hmHint {
-      margin-top: 10px;
-      color: var(--faint);
-      font-size: 12.5px;
-      font-family: var(--mono);
-    }
-
-    /* Activity page UI */
-    .activityGrid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    @media (min-width: 900px) {
-      .activityGrid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 180px;
-      resize: vertical;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 12px;
-      background: rgba(255, 255, 255, .03);
-      color: var(--text);
-      font-family: var(--sans);
-      font-size: 14.5px;
-      line-height: 1.5;
-      outline: none;
-    }
-
-    textarea:focus {
-      box-shadow: 0 0 0 3px rgba(199, 164, 99, .14);
-      border-color: rgba(199, 164, 99, .55);
-    }
-
-    [data-theme="light"] textarea:focus {
-      box-shadow: 0 0 0 3px rgba(122, 30, 30, .10);
-      border-color: rgba(122, 30, 30, .45);
-    }
-
-    .miniRow {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .miniPill {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .03);
-    }
-
-    /* Back to top */
-    .toTop {
-      position: fixed;
-      right: 16px;
-      bottom: 16px;
-      z-index: 998;
-      display: none;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 10px 12px;
-      background: rgba(0, 0, 0, .35);
-      color: var(--text);
-      cursor: pointer;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: var(--shadow);
-      font-size: 13px;
-    }
-
-    [data-theme="light"] .toTop {
-      background: rgba(246, 242, 234, .88);
-    }
-
-    .toTop.show {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Beloved (Ch. 20–24) — Close Read</title>
+
+<style>
+:root{
+--bg:#0e1116;
+--text:#f5f5f5;
+--muted:#b8b8b8;
+--accent:#8b2d2d;
+--accent2:#c7a463;
+--border:rgba(255,255,255,.12);
+--radius:18px;
+--max:1100px;
+--sans:ui-sans-serif,system-ui,-apple-system;
+--serif:Georgia,"Times New Roman",serif;
+}
+
+body{
+margin:0;
+font-family:var(--sans);
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
+}
+
+.wrap{max-width:var(--max);margin:auto;padding:40px 20px;}
+h1{font-family:var(--serif);font-size:36px;margin-bottom:10px;}
+h3{font-size:14px;text-transform:uppercase;color:var(--muted);}
+p.lead{color:var(--muted);max-width:800px;}
+
+nav{
+position:sticky;
+top:0;
+background:#11151c;
+padding:12px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:center;
+border-bottom:1px solid var(--border);
+}
+
+nav a{
+color:var(--text);
+text-decoration:none;
+padding:6px 12px;
+border-radius:999px;
+border:1px solid var(--border);
+font-size:13px;
+}
+
+nav a:hover{background:rgba(255,255,255,.08);}
+
+.card{
+border:1px solid var(--border);
+padding:18px;
+border-radius:var(--radius);
+margin-top:18px;
+}
+
+.grid{display:grid;gap:18px;}
+@media(min-width:900px){.grid{grid-template-columns:1fr 1fr;}}
+
+.quote{
+margin-top:20px;
+padding:18px;
+border-left:4px solid var(--accent2);
+background:rgba(255,255,255,.04);
+border-radius:var(--radius);
+}
+
+blockquote{
+font-family:var(--serif);
+font-size:22px;
+margin:0;
+}
+
+.hmRow{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;}
+.hmBtn{
+font-size:12px;
+border:1px solid var(--border);
+background:none;
+color:var(--text);
+padding:5px 10px;
+border-radius:999px;
+cursor:pointer;
+}
+
+.hmBtn.active{
+background:rgba(199,164,99,.2);
+}
+
+.tok{padding:0 3px;border-radius:4px;}
+.quote[data-mode="diction"] .tok[data-tags~="diction"],
+.quote[data-mode="syntax"] .tok[data-tags~="syntax"],
+.quote[data-mode="repetition"] .tok[data-tags~="repetition"],
+.quote[data-mode="between"] .tok[data-tags~="between"]{
+background:rgba(199,164,99,.3);
+}
+
+textarea{
+width:100%;
+min-height:150px;
+background:#161b22;
+color:white;
+border:1px solid var(--border);
+border-radius:12px;
+padding:10px;
+}
+</style>
 </head>
 
-<body data-theme="dark">
-  <div class="progress" aria-hidden="true">
-    <div id="progressBar"></div>
-  </div>
+<body>
 
-  <header class="nav">
-    <div class="navInner">
-      <div class="brand">
-        <div class="title">Beloved — Close Read</div>
-        <div class="sub">Ch. 20–24 • warmup + close reading</div>
-      </div>
+<nav>
+<a href="#overview">Overview</a>
+<a href="#ch20">Ch.20</a>
+<a href="#ch21">Ch.21</a>
+<a href="#ch22">Ch.22</a>
+<a href="#ch23">Ch.23</a>
+<a href="#ch24">Ch.24</a>
+<a href="#activity">Activity</a>
+<a href="#conclusion">Conclusion</a>
+</nav>
 
-      <nav class="navLinks" aria-label="Primary">
-        <a class="chip" href="#/overview" data-route="overview">Overview</a>
-        <a class="chip" href="#/ch20" data-route="ch20">Ch. 20</a>
-        <a class="chip" href="#/ch21" data-route="ch21">Ch. 21</a>
-        <a class="chip" href="#/ch22" data-route="ch22">Ch. 22</a>
-        <a class="chip" href="#/ch23" data-route="ch23">Ch. 23</a>
-        <a class="chip" href="#/ch24" data-route="ch24">Ch. 24</a>
-        <a class="chip" href="#/activity" data-route="activity">Activity</a>
-        <a class="chip" href="#/conclusion" data-route="conclusion">Conclusion</a>
-      </nav>
+<div class="wrap">
 
-      <div class="actions">
-        <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
-          Theme <small id="themeLabel">(Dark)</small>
-        </button>
-      </div>
-    </div>
-  </header>
+<!-- OVERVIEW -->
+<section id="overview">
+<h1>Where We Are in the Story (Ch. 20–24)</h1>
+<p class="lead">
+This section of Beloved is a pivotal moment in both the storyline and narration. The novel shifts into a sequence of monologues (Sethe, Danver then Beloved, then altogether?) that become increasingly more difficult to distinguish from one another, then Chapter 24 pulls outward into Paul D’s memory of Sweet Home, reconnecting with personal hauntings.
+</p>
 
-  <main class="wrap">
-    <div class="pages" id="pages">
+<div class="grid">
+<div class="card">
+<h3>Quick Orientation</h3>
+<ul>
+<li>Ch. 20–23: A series of first person narration monologues. The narration becomes intimate, fragmented, and resembles characters' feelings and thoughts.</li>
+<li>Ch. 20: Sethe argues her act as protection, she feels like she did the right thing and Beloved understands that.</li>
+<li>Ch. 21: Denver’s perspective highlights her fear of Sethe, loving Beloved and her father, and the tension between “inside” safety and “outside” danger.</li>
+<li>Ch. 22: Beloved’s voice seems to expand beyond one person, which seemingly hints at her representing something more than just Sethe’s daughter, maybe a collective history or some sort of memory.</li>
+<li>Ch. 23: The voices converge into repetition, blurring the perspective and highlighting interconnectedness. Hard to follow and meant to be that way.</li>
+<li>Ch. 24: Paul D’s chapter takes us back outside of 124 for the first time, narrates his memories of Sweet Home, Sixo's death and Halle</li>
+</ul>
+</div>
 
-      <!-- ===================== OVERVIEW ===================== -->
-      <section class="page" id="page-overview" data-page="overview">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Warmup / Background</div>
-              <h1>Where We Are in the Story (Ch. 20–24)</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Map / context">
-              <!-- Compass / map icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9Z" />
-                <path d="M14.5 9.5 16 8l-1.5 6.5L8 16l1.5-6.5L16 8" />
-                <path d="M12 12h.01" />
-              </svg>
-            </div>
-          </div>
+<div class="card">
+<h3>Reading Focus for Today</h3>
+<ul>
+<li>Track how voice and structure change across the sequence (who speaks, how clearly, and with what freedom do they seek?).</li>
+<li>Notice what “freedom” looks like for each individual, especially when the past keeps governing the present.</li>
+<li>How do we see this theme of “In-betweeness”, how could this create more complex relationships between characters in the novel?</li>
+</ul>
+</div>
+</div>
+</section>
 
-          <p class="lead">
-            These chapters sit at a turning point in <em>Beloved</em>. After the arrival of Beloved and the
-            destabilizing changes at 124,
-            the novel shifts into a sequence of intense interior monologues (20–23). The voices become increasingly
-            difficult to separate,
-            then Chapter 24 pulls outward into Paul D’s memory of Sweet Home—reconnecting personal haunting to
-            historical cause.
-          </p>
+<!-- CHAPTER 20 -->
+<section id="ch20">
+<h1>Chapter 20</h1>
 
-          <div class="grid two">
-            <div class="card">
-              <h3>Quick Orientation</h3>
-              <ul>
-                <li><strong>Ch. 20–23:</strong> A concentrated run of first-person voices. The narration becomes
-                  intimate, fragmented, and “inside the head.”</li>
-                <li><strong>Ch. 20:</strong> Sethe argues her act as protection; love and violence sit in the same
-                  sentence.</li>
-                <li><strong>Ch. 21:</strong> Denver’s perspective highlights fear, secrecy, and the tension between
-                  “inside” safety and “outside” danger.</li>
-                <li><strong>Ch. 22:</strong> Beloved’s voice expands beyond one person—suggesting collective history and
-                  bodily memory.</li>
-                <li><strong>Ch. 23:</strong> The voices converge into repetition, blurring identity and control.</li>
-                <li><strong>Ch. 24:</strong> Paul D’s chapter re-anchors the narrative in Sweet Home and slavery’s
-                  system.</li>
-              </ul>
-            </div>
+<div class="quote" data-quote-id="q20">
+<blockquote>
+“If I <span class="tok" data-tags="syntax between">hadn't killed her</span> she <span class="tok" data-tags="syntax between">would have died</span> and that is something I <span class="tok" data-tags="diction between">could not bear</span> to happen to her.”
+</blockquote>
+<div class="hmRow">
+<button class="hmBtn" data-mode="off">Off</button>
+<button class="hmBtn" data-mode="diction">Diction</button>
+<button class="hmBtn" data-mode="syntax">Syntax</button>
+<button class="hmBtn" data-mode="repetition">Repetition</button>
+<button class="hmBtn" data-mode="between">In-Between</button>
+</div>
+</div>
 
-            <div class="card">
-              <h3>Reading Focus for Today</h3>
-              <ul>
-                <li>Track how voice and structure change across the sequence (who speaks, how clearly, and with what
-                  stability).</li>
-                <li>Notice what “freedom” looks like psychologically—especially when the past keeps governing the
-                  present.</li>
-                <li>Pay attention to ownership language and claims (“mine”)—and what it does to relationships.</li>
-              </ul>
-            </div>
-          </div>
+<div class="grid">
+<div class="card">
+<h3>Language & Form</h3>
+<ul>
+<li>Frames Sethe’s choice as made out of necessity.</li>
+<li>Diction like “bear” ties in Sethe's emotions, impossible for her not to do it.</li>
+<li>Raises the moral dilemma once again, is this justified?</li>
+</ul>
+</div>
 
-          <div class="thesis" role="note" aria-label="Thesis">
-            <div class="label">Thesis (Close Reading Lens)</div>
-            <p>
-              In Chapters 20–24, Morrison uses fragmented narration, merging voices, and obsessive possessive language
-              to portray
-              the afterlife of slavery as a state of in-betweenness—where freedom remains haunted, love becomes
-              ownership,
-              and identity exists suspended between past and present.
-            </p>
-          </div>
-        </div>
-      </section>
+<div class="card">
+<h3>Meaning</h3>
+<ul>
+<li>Sethe is “free,” yet still governed by the fear and threat of slavery.</li>
+<li>Love becomes a questionable justification tool.</li>
+<li>Juxtaposition of wanting what is best for beloved</li>
+</ul>
+</div>
+</div>
+</section>
 
-      <!-- ===================== CHAPTER 20 ===================== -->
-      <section class="page" id="page-ch20" data-page="ch20">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Chapter 20 • Sethe</div>
-              <h1>Ch. 20 — Love ↔ Violence</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Heart / blade">
-              <!-- Heart / cut icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path
-                  d="M12 21s-7-4.6-9.5-9C.5 7.5 3 5 6 5c1.7 0 3.2.8 4 2 0 0 1.4-2 4-2 3 0 5.5 2.5 3.5 7-2.5 4.4-9.5 9-9.5 9Z" />
-                <path d="M9 12l6-6" />
-              </svg>
-            </div>
-          </div>
+<!-- CHAPTER 21 -->
+<section id="ch21">
+<h1>Chapter 21</h1>
 
-          <p class="lead">
-            Sethe’s logic sits in the moral “in-between”: she frames harm as protection, because slavery defines the
-            stakes of what “protection” means.
-          </p>
+<div class="quote" data-quote-id="q21">
+<blockquote>
+“I always knew he was coming. Something was holding him up. The river flooded; the boat sank and he had to make a new one...He was coming and it was a secret.”
+</blockquote>
+<div class="hmRow">
+<button class="hmBtn" data-mode="off">Off</button>
+<button class="hmBtn" data-mode="diction">Diction</button>
+<button class="hmBtn" data-mode="syntax">Syntax</button>
+<button class="hmBtn" data-mode="repetition">Repetition</button>
+<button class="hmBtn" data-mode="between">In-Between</button>
+</div>
+</div>
 
-          <div class="quote" data-quote-id="q20">
-            <div class="qLabel">Quote • Highlight Mode</div>
-            <blockquote>
-              “If I <span class="tok" data-tags="syntax diction between">hadn't killed her</span> she
-              <span class="tok" data-tags="syntax diction between">would have died</span> and that is something I
-              <span class="tok" data-tags="diction between">could not bear</span> to happen to her.”
-            </blockquote>
+<div class="grid">
+<div class="card">
+<h3>Language & Form</h3>
+<ul>
+<li>Seems to justify and yearn for an escape from 124.</li>
+<li>Secrecy is highlighted in the diction, this is information only for Denver</li>
+<li>The list of obstacles gives the reader a sense of hopelessness, and seems unlikely he will ever come .</li>
+</ul>
+</div>
 
-            <div class="hmRow" role="group" aria-label="Highlight Mode Controls">
-              <button class="hmBtn" data-mode="off" type="button">Off</button>
-              <button class="hmBtn" data-mode="diction" type="button">Diction</button>
-              <button class="hmBtn" data-mode="syntax" type="button">Syntax</button>
-              <button class="hmBtn" data-mode="repetition" type="button">Repetition</button>
-              <button class="hmBtn" data-mode="between" type="button">In-Between</button>
-            </div>
-            <div class="hmHint">Tip: click a mode to highlight what you want to close read. Use “Syntax” to see how
-              inevitability is built into the sentence.</div>
-          </div>
-        </div>
+<div class="card">
+<h3>Meaning</h3>
+<ul>
+<li>Draws some parallels to Sethe escaping Sweet Home.</li>
+<li>Seems to be in a state of in between, two realities outside and inside of 124</li>
+<li>The product of freedom seems like she is not fully free either.</li>
+</ul>
+</div>
+</div>
+</section>
 
-        <div class="grid two">
-          <div class="card">
-            <h3>Language & Form</h3>
-            <ul>
-              <li>The conditional structure compresses choice into necessity.</li>
-              <li>Diction like “bear” frames the act as emotional impossibility rather than decision.</li>
-              <li>The sentence functions like testimony: justification replaces narration.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Meaning</h3>
-            <ul>
-              <li>Sethe is “free,” yet still governed by slavery’s threat system.</li>
-              <li>Love becomes an emergency logic—where safety is imagined only through extremes.</li>
-              <li>Morrison forces comprehension without granting easy closure.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<!-- CHAPTER 22 -->
+<section id="ch22">
+<h1>Chapter 22</h1>
 
-      <!-- ===================== CHAPTER 21 ===================== -->
-      <section class="page" id="page-ch21" data-page="ch21">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Chapter 21 • Denver</div>
-              <h1>Ch. 21 — Escape ↔ Containment</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Gate / lock">
-              <!-- Lock icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M7 11V8a5 5 0 0 1 10 0v3" />
-                <path d="M6 11h12v10H6z" />
-                <path d="M12 16v2" />
-              </svg>
-            </div>
-          </div>
+<div class="quote" data-quote-id="q22">
+<blockquote>
+“We are not crouching now we are standing but my legs are like my dead man's eyes I cannot fall because there is no room to.”
+</blockquote>
+<div class="hmRow">
+<button class="hmBtn" data-mode="off">Off</button>
+<button class="hmBtn" data-mode="diction">Diction</button>
+<button class="hmBtn" data-mode="syntax">Syntax</button>
+<button class="hmBtn" data-mode="repetition">Repetition</button>
+<button class="hmBtn" data-mode="between">In-Between</button>
+</div>
+</div>
 
-          <p class="lead">
-            Denver imagines rescue while living inside secrecy and delay—freedom rehearsed mentally, postponed
-            materially.
-          </p>
+<div class="grid">
+<div class="card">
+<h3>Language & Form</h3>
+<ul>
+<li>Collective pronoun “We” expands Beloved beyond one person.</li>
+<li>Short syntax mirrors physical restriction.</li>
+<li>Death imagery is mixed in with the living/blurring the boundaries.</li>
+</ul>
+</div>
 
-          <div class="quote" data-quote-id="q21">
-            <div class="qLabel">Quote • Highlight Mode (p. 207)</div>
-            <blockquote>
-              “I <span class="tok" data-tags="diction between">always knew</span> he was coming.
-              Something was <span class="tok" data-tags="diction between">holding him up</span>.
-              <span class="tok" data-tags="repetition syntax">The river flooded; the boat sank</span> and he had to make
-              a new one...
-              He was coming and it was a <span class="tok" data-tags="diction between">secret</span>.”
-            </blockquote>
+<div class="card">
+<h3>Meaning</h3>
+<ul>
+<li>Beloved occupies the in-between: dead ↔ alive singular ↔ collective.</li>
+<li>The haunting becomes historical, not just a private family problem.</li>
+<li>Beloved seems to be different, in between character and instigator.</li>
+</ul>
+</div>
+</div>
+</section>
 
-            <div class="hmRow" role="group" aria-label="Highlight Mode Controls">
-              <button class="hmBtn" data-mode="off" type="button">Off</button>
-              <button class="hmBtn" data-mode="diction" type="button">Diction</button>
-              <button class="hmBtn" data-mode="syntax" type="button">Syntax</button>
-              <button class="hmBtn" data-mode="repetition" type="button">Repetition</button>
-              <button class="hmBtn" data-mode="between" type="button">In-Between</button>
-            </div>
-            <div class="hmHint">Try “Repetition” and “In-Between”: notice how obstacles + secrecy define the shape of
-              hope.</div>
-          </div>
-        </div>
+<!-- CHAPTER 23 -->
+<section id="ch23">
+<h1>Chapter 23</h1>
 
-        <div class="grid two">
-          <div class="card">
-            <h3>Language & Form</h3>
-            <ul>
-              <li>Obstacle-listing turns rescue into perpetual delay.</li>
-              <li>Secrecy is a survival grammar: concealment feels necessary for safety.</li>
-              <li>Rhythm of postponement makes “coming” feel endless rather than imminent.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Meaning</h3>
-            <ul>
-              <li>Denver lives between “outside” possibility and “inside” fear.</li>
-              <li>Hope can become self-protection: imagined escape to survive present instability.</li>
-              <li>Afterlife of slavery appears as mental boundary-setting—training what feels possible.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<div class="quote" data-quote-id="q23">
+<blockquote>
+“You are mine.<br>You are mine.<br>You are mine.”
+</blockquote>
+<div class="hmRow">
+<button class="hmBtn" data-mode="off">Off</button>
+<button class="hmBtn" data-mode="diction">Diction</button>
+<button class="hmBtn" data-mode="syntax">Syntax</button>
+<button class="hmBtn" data-mode="repetition">Repetition</button>
+<button class="hmBtn" data-mode="between">In-Between</button>
+</div>
+</div>
 
-      <!-- ===================== CHAPTER 22 ===================== -->
-      <section class="page" id="page-ch22" data-page="ch22">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Chapter 22 • Beloved</div>
-              <h1>Ch. 22 — Ghost ↔ Collective History</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Ship">
-              <!-- Ship icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M3 18h18" />
-                <path d="M4 18l2-5h12l2 5" />
-                <path d="M12 3v10" />
-                <path d="M12 3l6 4H12" />
-                <path d="M12 3L6 7h6" />
-              </svg>
-            </div>
-          </div>
+<div class="grid">
+<div class="card">
+<h3>Language & Form</h3>
+<ul>
+<li>Repetition functions like incantation</li>
+<li>Extremely short syntax</li>
+<li>Voice is very hard to locate.</li>
+</ul>
+</div>
 
-          <p class="lead">
-            Beloved’s voice blurs the personal and the historical: the body becomes the site where collective memory is
-            felt.
-          </p>
+<div class="card">
+<h3>Meaning</h3>
+<ul>
+<li>The interconnectedness of the characters seem to all be united by something.</li>
+<li>Questions surrounding love and possession, does something need to be yours so you can love it?</li>
+</ul>
+</div>
+</div>
+</section>
 
-          <div class="quote" data-quote-id="q22">
-            <div class="qLabel">Quote • Highlight Mode (p. 211)</div>
-            <blockquote>
-              “We are <span class="tok" data-tags="syntax repetition">not crouching now</span> we are
-              <span class="tok" data-tags="syntax repetition">standing</span> but my legs are like my
-              <span class="tok" data-tags="diction between">dead man's eyes</span> I cannot fall because there is
-              <span class="tok" data-tags="diction between">no room</span> to.”
-            </blockquote>
+<!-- CHAPTER 24 -->
+<section id="ch24">
+<h1>Chapter 24</h1>
 
-            <div class="hmRow" role="group" aria-label="Highlight Mode Controls">
-              <button class="hmBtn" data-mode="off" type="button">Off</button>
-              <button class="hmBtn" data-mode="diction" type="button">Diction</button>
-              <button class="hmBtn" data-mode="syntax" type="button">Syntax</button>
-              <button class="hmBtn" data-mode="repetition" type="button">Repetition</button>
-              <button class="hmBtn" data-mode="between" type="button">In-Between</button>
-            </div>
-            <div class="hmHint">Try “Syntax”: the line feels breathless and compressed—form reproduces confinement.
-            </div>
-          </div>
-        </div>
+<div class="quote" data-quote-id="q24">
+<blockquote>
+“Nobody counted on Garner dying. Nobody thought he could...Now ain't that slavery or what is it?”
+</blockquote>
+<div class="hmRow">
+<button class="hmBtn" data-mode="off">Off</button>
+<button class="hmBtn" data-mode="diction">Diction</button>
+<button class="hmBtn" data-mode="syntax">Syntax</button>
+<button class="hmBtn" data-mode="repetition">Repetition</button>
+<button class="hmBtn" data-mode="between">In-Between</button>
+</div>
+</div>
 
-        <div class="grid two">
-          <div class="card">
-            <h3>Language & Form</h3>
-            <ul>
-              <li>Collective pronoun “We” expands Beloved beyond one person.</li>
-              <li>Compressed phrasing mirrors physical constriction.</li>
-              <li>Death imagery merges with the living body, collapsing boundaries.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Meaning</h3>
-            <ul>
-              <li>Beloved occupies the in-between: dead ↔ alive, singular ↔ collective.</li>
-              <li>The haunting becomes historical pressure, not just a private family problem.</li>
-              <li>The body carries history as sensation and limitation (“no room”).</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<div class="grid">
+<div class="card">
+<h3>Language & Form</h3>
+<ul>
+<li>The rhetorical question makes a strong suggestion.</li>
+<li>Repetition  of Nobody  creates  the illusion of security as coming from a collective</li>
+</ul>
+</div>
 
-      <!-- ===================== CHAPTER 23 ===================== -->
-      <section class="page" id="page-ch23" data-page="ch23">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Chapter 23 • Merged Voices</div>
-              <h1>Ch. 23 — Interconnectedness ↔ Erasure</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Interlocking circles">
-              <!-- Interlocking rings icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <circle cx="9" cy="12" r="5" />
-                <circle cx="15" cy="12" r="5" />
-                <path d="M12 7v10" />
-              </svg>
-            </div>
-          </div>
+<div class="card">
+<h3>Meaning</h3>
+<ul>
+<li>Ch. 24 re-anchors the story using narration.</li>
+<li>Again asking whether people can ever truly be free from slavery.</li>
+<li>“In between” past and future traumas</li>
+</ul>
+</div>
+</div>
+</section>
 
-          <p class="lead">
-            The chant makes relationship feel ritualistic: language tries to force permanence, but it also collapses
-            boundaries.
-          </p>
+<!-- ACTIVITY -->
+<section id="activity">
+<h1>Rewrite for Grammatical Clarity</h1>
 
-          <div class="quote" data-quote-id="q23">
-            <div class="qLabel">Quote • Highlight Mode</div>
-            <blockquote aria-label="Repeated line">
-              <span class="tok" data-tags="repetition between">You are mine.</span><br />
-              <span class="tok" data-tags="repetition between">You are mine.</span><br />
-              <span class="tok" data-tags="repetition between">You are mine.</span>
-            </blockquote>
+<div class="card">
+<p>Choose one quote from Chapters 20-24 and rewrite it into standard grammar and punctuation. Then answer:</p>
+<ul>
+<li>What changed?</li>
+<li>What is lost?</li>
+<li>Does clarity alter the emotional effect?</li>
+</ul>
+</div>
 
-            <div class="hmRow" role="group" aria-label="Highlight Mode Controls">
-              <button class="hmBtn" data-mode="off" type="button">Off</button>
-              <button class="hmBtn" data-mode="diction" type="button">Diction</button>
-              <button class="hmBtn" data-mode="syntax" type="button">Syntax</button>
-              <button class="hmBtn" data-mode="repetition" type="button">Repetition</button>
-              <button class="hmBtn" data-mode="between" type="button">In-Between</button>
-            </div>
-            <div class="hmHint">“Repetition” is the main engine here—ask what the chant is trying to accomplish (and
-              what it threatens).</div>
-          </div>
-        </div>
+<div class="grid">
+<textarea placeholder="Original quote..."></textarea>
+<textarea placeholder="Rewrite for clarity..."></textarea>
+</div>
+</section>
 
-        <div class="grid two">
-          <div class="card">
-            <h3>Language & Form</h3>
-            <ul>
-              <li>Repetition functions like incantation: speech becomes force.</li>
-              <li>Minimal syntax reduces relationship to possession.</li>
-              <li>Voice convergence makes selfhood hard to locate.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Meaning</h3>
-            <ul>
-              <li>Interconnectedness is double-edged: intimacy ↔ engulfment.</li>
-              <li>After slavery, attachment can inherit ownership language.</li>
-              <li>Morrison asks whether love can survive when “mine” survives.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<!-- CONCLUSION -->
+<section id="conclusion">
+<h1>Conclusion</h1>
 
-      <!-- ===================== CHAPTER 24 ===================== -->
-      <section class="page" id="page-ch24" data-page="ch24">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Chapter 24 • Paul D</div>
-              <h1>Ch. 24 — Haunting ↔ Historical Cause</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Chain / system">
-              <!-- Chain link icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M10 13a5 5 0 0 1 0-7l1-1a5 5 0 0 1 7 7l-1 1" />
-                <path d="M14 11a5 5 0 0 1 0 7l-1 1a5 5 0 0 1-7-7l1-1" />
-              </svg>
-            </div>
-          </div>
+<p class="lead">
+Chapters 20-24 demonstrates that “Beloved” is a novel about in-between-ness. Freedom, love and morality is not as clean cut as one might expect and Morrison reveals this through her characters.
+</p>
 
-          <p class="lead">
-            The narrative shifts outward: Paul D names slavery as structure—showing how any “stability” was always
-            revocable under ownership.
-          </p>
+<div class="grid">
+<div class="card">
+<h3>Key Takeaways</h3>
+<ul>
+<li>Fragmentation of text is intentional → Contributes to a deeper understanding of the work</li>
+<li>There is tension in the removal of borders, physical and mental</li>
+</ul>
+</div>
 
-          <div class="quote" data-quote-id="q24">
-            <div class="qLabel">Quote • Highlight Mode</div>
-            <blockquote>
-              “<span class="tok" data-tags="repetition syntax">Nobody</span> counted on Garner dying.
-              <span class="tok" data-tags="repetition syntax">Nobody</span> thought he could... Now ain't that
-              <span class="tok" data-tags="diction between">slavery</span> or what is it?”
-            </blockquote>
+<div class="card">
+<h3>Discussion Questions</h3>
+<ul>
+<li>Does (re)memory fuel the characters or tie them to the past?</li>
+<li>When does love become ownership in these chapters, are these two things dependent on each other?</li>
+<li>What overall assumptions can we make about Beloved and her relationship with the other characters?</li>
+</ul>
+</div>
+</div>
+</section>
 
-            <div class="hmRow" role="group" aria-label="Highlight Mode Controls">
-              <button class="hmBtn" data-mode="off" type="button">Off</button>
-              <button class="hmBtn" data-mode="diction" type="button">Diction</button>
-              <button class="hmBtn" data-mode="syntax" type="button">Syntax</button>
-              <button class="hmBtn" data-mode="repetition" type="button">Repetition</button>
-              <button class="hmBtn" data-mode="between" type="button">In-Between</button>
-            </div>
-            <div class="hmHint">Try “Repetition” on “Nobody” and “In-Between” on “slavery”: the line defines slavery as
-              structure, not just cruelty.</div>
-          </div>
-        </div>
+</div>
 
-        <div class="grid two">
-          <div class="card">
-            <h3>Language & Form</h3>
-            <ul>
-              <li>The rhetorical question is a naming act: it refuses euphemism.</li>
-              <li>Repetition (“Nobody”) frames the illusion of security as collective miscalculation.</li>
-              <li>The ellipsis marks shock—meaning outruns grammar.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Meaning</h3>
-            <ul>
-              <li>Ch. 24 re-anchors the haunting in systemic cause.</li>
-              <li>“Better” conditions still depended on ownership—always reversible.</li>
-              <li>The afterlife of slavery is the distortion of what safety and home can mean.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+<script>
+document.querySelectorAll(".quote").forEach(q=>{
+q.querySelectorAll(".hmBtn").forEach(btn=>{
+btn.addEventListener("click",()=>{
+q.dataset.mode=btn.dataset.mode;
+q.querySelectorAll(".hmBtn").forEach(b=>b.classList.remove("active"));
+btn.classList.add("active");
+});
+});
+});
+</script>
 
-      <!-- ===================== ACTIVITY PAGE ===================== -->
-      <section class="page" id="page-activity" data-page="activity">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Interactive Activity</div>
-              <h1>Rewrite for Grammatical Clarity</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Edit / rewrite">
-              <!-- Pencil icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 20h9" />
-                <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z" />
-              </svg>
-            </div>
-          </div>
-
-          <p class="lead">
-            Morrison’s syntax often refuses “clean” grammar—especially in the monologues. This activity tests what
-            happens when we force clarity onto a line.
-          </p>
-
-          <div class="card">
-            <h3>Directions (5–8 minutes)</h3>
-            <ul>
-              <li>Choose <strong>one</strong> quote from Chapters 20–24.</li>
-              <li>Rewrite it into standard grammar and complete punctuation—make it “clear.”</li>
-              <li>Then answer: what changed? what was lost? what new meaning appeared?</li>
-            </ul>
-            <div class="miniRow">
-              <span class="miniPill">Goal: form → effect → meaning</span>
-              <span class="miniPill">No plot summary</span>
-              <span class="miniPill">Be specific</span>
-            </div>
-          </div>
-
-          <div class="activityGrid">
-            <div class="card">
-              <h3>Original Quote (paste one)</h3>
-              <textarea id="origText" placeholder="Paste the original quote here (short fragment)."></textarea>
-              <div class="miniRow">
-                <button class="btn" id="loadSample" type="button">Load sample (Ch. 22)</button>
-                <button class="btn" id="clearBoth" type="button">Clear</button>
-              </div>
-            </div>
-
-            <div class="card">
-              <h3>Rewrite for Clarity</h3>
-              <textarea id="rewriteText" placeholder="Rewrite in standard grammar + punctuation."></textarea>
-              <div class="miniRow">
-                <button class="btn" id="copyRewrite" type="button">Copy rewrite</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid two">
-            <div class="card">
-              <h3>Reflection Questions</h3>
-              <ul>
-                <li>What emotional effect did the original syntax create?</li>
-                <li>What did your “clean grammar” remove (urgency, breathlessness, fragmentation, ambiguity)?</li>
-                <li>Did the rewrite make the speaker feel more stable? More distant? More rational?</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>Deeper Push</h3>
-              <ul>
-                <li>Does grammatical clarity make the line more “acceptable” — and if so, why does that matter here?
-                </li>
-                <li>What does Morrison gain by refusing standard grammar in these sections?</li>
-                <li>How does this connect to the “afterlife of slavery” (history shaping voice and selfhood)?</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===================== CONCLUSION ===================== -->
-      <section class="page" id="page-conclusion" data-page="conclusion">
-        <div class="hero">
-          <div class="heroTop">
-            <div>
-              <div class="kicker">Synthesis</div>
-              <h1>Conclusion</h1>
-            </div>
-            <div class="iconBadge" aria-hidden="true" title="Synthesis">
-              <!-- Spark icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M12 2l1.2 4.4L18 8l-4.8 1.6L12 14l-1.2-4.4L6 8l4.8-1.6L12 2Z" />
-                <path d="M5 14l.7 2.6L8 18l-2.3.8L5 21l-.7-2.2L2 18l2.3-1.4L5 14Z" />
-                <path d="M19 13l.7 2.6L22 17l-2.3.8L19 20l-.7-2.2L16 17l2.3-1.4L19 13Z" />
-              </svg>
-            </div>
-          </div>
-
-          <p class="lead">
-            Chapters 20–24 show that “freedom” is not a clean border. Morrison writes the afterlife of slavery as a
-            lived condition:
-            the past presses into language, relationships, and the stability of the self.
-          </p>
-
-          <div class="grid two">
-            <div class="card">
-              <h3>Key Takeaways</h3>
-              <ul>
-                <li>Fragmented voice isn’t style—it’s trauma made readable as structure.</li>
-                <li>Possessive language marks contamination: ownership logic survives inside attachment.</li>
-                <li>The pivot to Paul D re-anchors haunting in systemic cause, not supernatural mystery.</li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>Discussion Questions</h3>
-              <ul>
-                <li>Does memory demand confrontation, or does it consume the living?</li>
-                <li>When does love become ownership in these chapters—and what triggers the shift?</li>
-                <li>What changes when the narration moves from interior voices to historical framing?</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  </main>
-
-  <button class="toTop" id="toTop" type="button" aria-label="Back to top">↑ Top</button>
-
-  <script>
-    // ---------- Routing ----------
-    const pages = Array.from(document.querySelectorAll(".page"));
-    const navChips = Array.from(document.querySelectorAll(".chip[data-route]"));
-
-    function getRoute() {
-      const hash = window.location.hash || "#/overview";
-      const match = hash.match(/^#\/([a-z0-9-]+)/i);
-      return match ? match[1] : "overview";
-    }
-    function routeTitle(route) {
-      const map = {
-        overview: "Beloved — Overview",
-        ch20: "Beloved — Chapter 20",
-        ch21: "Beloved — Chapter 21",
-        ch22: "Beloved — Chapter 22",
-        ch23: "Beloved — Chapter 23",
-        ch24: "Beloved — Chapter 24",
-        activity: "Beloved — Activity",
-        conclusion: "Beloved — Conclusion"
-      };
-      return map[route] || "Beloved — Close Read";
-    }
-    function prefersReducedMotion() {
-      return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }
-    function setActiveRoute(route) {
-      pages.forEach(p => p.classList.toggle("active", p.dataset.page === route));
-      navChips.forEach(a => {
-        const active = a.dataset.route === route;
-        a.setAttribute("aria-current", active ? "page" : "false");
-      });
-      window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" });
-      document.title = routeTitle(route);
-    }
-    window.addEventListener("hashchange", () => setActiveRoute(getRoute()));
-    setActiveRoute(getRoute());
-
-    // ---------- Theme toggle ----------
-    const themeBtn = document.getElementById("themeBtn");
-    const themeLabel = document.getElementById("themeLabel");
-    const storedTheme = localStorage.getItem("theme");
-    if (storedTheme === "light" || storedTheme === "dark") {
-      document.body.setAttribute("data-theme", storedTheme);
-      themeLabel.textContent = storedTheme === "dark" ? "(Dark)" : "(Light)";
-    }
-    themeBtn.addEventListener("click", () => {
-      const current = document.body.getAttribute("data-theme") || "dark";
-      const next = current === "dark" ? "light" : "dark";
-      document.body.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-      themeLabel.textContent = next === "dark" ? "(Dark)" : "(Light)";
-    });
-
-    // ---------- Progress bar + back-to-top ----------
-    const progressBar = document.getElementById("progressBar");
-    const toTop = document.getElementById("toTop");
-    function updateProgress() {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      progressBar.style.width = pct.toFixed(2) + "%";
-      if (scrollTop > 600) toTop.classList.add("show");
-      else toTop.classList.remove("show");
-    }
-    window.addEventListener("scroll", updateProgress, { passive: true });
-    updateProgress();
-    toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? "auto" : "smooth" }));
-
-    // ---------- Highlight Mode ----------
-    // Each .quote gets its own independent mode (stored per quote id in memory).
-    const quotes = Array.from(document.querySelectorAll(".quote[data-quote-id]"));
-
-    function setQuoteMode(quoteEl, mode) {
-      quoteEl.setAttribute("data-mode", mode);
-      const buttons = Array.from(quoteEl.querySelectorAll(".hmBtn"));
-      buttons.forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
-    }
-
-    quotes.forEach(q => {
-      // default: off
-      setQuoteMode(q, "off");
-      q.querySelectorAll(".hmBtn").forEach(btn => {
-        btn.addEventListener("click", () => setQuoteMode(q, btn.dataset.mode));
-      });
-    });
-
-    // ---------- Activity helpers ----------
-    const origText = document.getElementById("origText");
-    const rewriteText = document.getElementById("rewriteText");
-    const loadSample = document.getElementById("loadSample");
-    const clearBoth = document.getElementById("clearBoth");
-    const copyRewrite = document.getElementById("copyRewrite");
-
-    if (loadSample && origText && rewriteText) {
-      loadSample.addEventListener("click", () => {
-        origText.value = "We are not crouching now we are standing but my legs are like my dead man's eyes I cannot fall because there is no room to.";
-        rewriteText.value = "";
-        origText.focus();
-      });
-    }
-    if (clearBoth && origText && rewriteText) {
-      clearBoth.addEventListener("click", () => {
-        origText.value = "";
-        rewriteText.value = "";
-        origText.focus();
-      });
-    }
-    if (copyRewrite && rewriteText) {
-      copyRewrite.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(rewriteText.value || "");
-          copyRewrite.textContent = "Copied!";
-          setTimeout(() => copyRewrite.textContent = "Copy rewrite", 900);
-        } catch (e) {
-          copyRewrite.textContent = "Copy failed";
-          setTimeout(() => copyRewrite.textContent = "Copy rewrite", 900);
-        }
-      });
-    }
-
-    // Optional keyboard shortcuts (1..8) for rehearsal
-    const shortcuts = {
-      "1": "overview",
-      "2": "ch20",
-      "3": "ch21",
-      "4": "ch22",
-      "5": "ch23",
-      "6": "ch24",
-      "7": "activity",
-      "8": "conclusion"
-    };
-    window.addEventListener("keydown", (e) => {
-      if (e.target && ["INPUT", "TEXTAREA"].includes(e.target.tagName)) return;
-      if (shortcuts[e.key]) window.location.hash = "#/" + shortcuts[e.key];
-    });
-  </script>
 </body>
-
 </html>
